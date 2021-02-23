@@ -1,3 +1,3 @@
-# [VLDB2021] BenchGAD: An Empirical Framework for GPU-accelerated DBMSes
+# [VLDB2021] A Comprehensive Empirical Study Across GPU-accelerated DBMSes for Better Understanding Performance Implications
 
 - query.txt: 12 variants of Q12
