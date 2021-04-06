@@ -1,0 +1,54 @@
+.nav-wrapper {
+  width: 100vw;
+  padding: 0 36px;
+  display: flex;
+  justify-content: space-between;
+  height: 56px;
+  border-bottom: 1px solid #888;
+  position: fixed;
+  background-color: #fff;
+}
+
+.nav-logo {
+  font-size: 18px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+}
+
+.nav-search {
+  font-size: 14px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+}
+
+.nav-btn-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.nav-btn {
+  background-color: #000;
+  font-size: 14px;
+  font-weight: bold;
+  color: #fff;
+  border-radius: 5px;
+  padding: 0 15px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  height: 44px;
+}
+
+.modal-overlay {
+  position: fixed;
+  z-index: 1;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0,0,0,0.4);
+}

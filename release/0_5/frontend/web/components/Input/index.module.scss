@@ -1,0 +1,43 @@
+.input-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 180px;
+}
+
+.label {
+  width: 100%;
+  font-size: 14px;
+  line-height: 1;
+  margin-bottom: 8px;
+  text-align: left;
+  color: #6C687D;
+}
+
+.input {
+  width: 100%;
+  height: 46px;
+  background: #ECEBF0;
+  font-size: 14px;
+  line-height: 1;
+  padding: 16px;
+  overflow-x: scroll;
+  align-items: center;
+  color: #000;
+  border: none;
+
+  &:focus {
+    border: 1px solid #604ABD;
+    box-sizing: border-box;
+  }
+
+  &::placeholder {
+    color: #8B879C;
+  }
+
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  -moz-appearance: textfield;
+}

@@ -1,0 +1,25 @@
+.checkbox-inner {
+  min-width: 50px;
+  display: flex;
+  flex-direction: row;
+  cursor: pointer;
+
+  img {
+    width: 16px;
+    height: 16px;
+    margin-right: 8px;
+  }
+
+  .checkbox-label-active {
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 1;
+    color: #503AA9;
+  }
+
+  .checkbox-label {
+    font-size: 14px;
+    line-height: 1;
+    color: #000;
+  }
+}
