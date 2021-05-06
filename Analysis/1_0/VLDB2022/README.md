@@ -100,13 +100,7 @@ fit = lm(GM ~ HDT, data = entire_dataset)
 summary(fit)
 ```
 
-# NormalizationandCorrelation.R
-
-Description of NormalizationandCorrelation.R
-
-# QueryKernel.R
-
-Description of QueryKernel.R
+<br>
 
 # ReArrange.R
 
