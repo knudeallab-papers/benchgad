@@ -11,7 +11,6 @@ dataset <- read.csv(file=paste0(folder, '/raw_dataset.csv'), header = TRUE,strin
 preprocessed_dataset <- preprocessing(dataset)
 
 RowName="Row_No"
-queryNumber="QNo"
 full_feature <- c(RowName, 'DBMS', 'IM', 'CF', 'MG', 'RAM_Size', 'Gen', 'GM', 'DB_Size', 'QNo','AGG',
                       'SQ', 'NumJoins', 'NumFTAtts', 'NumAllAtts', 'NumAllTbl',
                       'NumDsTbl', 'CW', 'OB', 'HDT','DHT','PF','NumIK', 'KT','ET')
