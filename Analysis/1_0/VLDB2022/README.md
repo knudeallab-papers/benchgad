@@ -14,51 +14,71 @@ Row_No,DBMS,IM,CF,MG,RAM_Size,Gen,GM,IC,DB_Size,QNo,AGG,SQ,NumJoins,NumFTAtts,Nu
 - **MG**: Indicates whether Multi-GPU was used or not. 
 
     >Related to **_Hardware Complexity - Number of GPU cards_** in Figure 1.
+
 - **RAM_Size**: The size of RAM. 
 
     >Related to **_Hardware Complexity - Amount of device memory_** in Figure 1.
+
 - **Gen**: The generation of GPU. 
 
     >Related to **_Hardware Complexity - Number of GPU cores_** in Figure 1.
+
 - **GM**: The size of VRAM. 
 
     >Related to **_Hardware Complexity - Amount of host memory_** in Figure 1.
+
 - **DB_Size**: The size of [TPC-H](http://www.tpc.org/tpch/) data. 
 
-    >Related to **_Data Complexity -Scale of data volume_** in Figure 1.)
+    >Related to **_Data Complexity -Scale of data volume_** in Figure 1.
+
 - **QNo**: The sequence number of each [TPC-H](http://www.tpc.org/tpch/) query.
+
 - **AGG**: Indicates whether each query has _aggregation_ operation or not. 
 
     >Related to **_Query Complexity - Presence of aggregate_** in Figure 1.
+
 - **SQ**: Indicates whether each query has _subquery_ operation or not. 
 
     >Related to **_Query Complexity - Presence of subquery_** in Figure 1.
+
 - **NumJoins**: The number of joins.
 
     >Realted to **_Query Complexity - Number of joins_** in Figure 1.
+
 - **NumFTAtts**: The number of attributes to be referenced on the fact table.
+
 - **NumAllAtts**: The number of attributes to be referenced by query.
 
     >Related to **_Query Complexity - Number of used attributes_** in Figure 1.
+
 - **NumAllTbl**: The number of all tables to be referenced.
+
 - **NumDsTbl**: The number of distinct tables to be referenced.
+
 - **CW**: Indicates whether each query has _case-when_ operation or not. 
+
 - **OB**: Indicates whether each query has _order by_ operation or not. 
+
 - **HDT**: Data migration(_HtoD_) time.
 
     >Related to **_Kernel Complexity - Data transfer time_** in Figure 1.
+
 - **DHT**: Data migration(_DtoH_) time.
 
     >Related to **_Kernel Complexity - Data transfer time_** in Figure 1.
+
 - **PF**: The number of _page fault_.
 
     >Related to **_Kernel Complexity - Number of page faults_** in Figure 1.
+
 - **NumIK**: The number of kernels invoked.
 
     >Related to **_Kernel Complexity - Number of invoked kernels_** in Figure 1.
+
 - **KT**: The kernel execution time of each query.
 
     >Related to **_Kernel Complexity - Kernel execution time_** in Figure 1.
+    
 - **ET**: The elapsed time of each query.
 
     >Related to **_Query time_** in Figure 1.
