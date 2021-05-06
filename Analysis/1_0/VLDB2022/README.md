@@ -1,20 +1,3 @@
-# main.R
-
-Description of main.R
-
-# NormalizationandCorrelation.R
-
-Description of NormalizationandCorrelation.R
-
-# QueryKernel.R
-
-Description of QueryKernel.R
-
-# ReArrange.R
-
-Description of ReArrange.R
-
-
 # raw_dataset.csv
 
 
@@ -79,3 +62,52 @@ Row_No,DBMS,IM,CF,MG,RAM_Size,Gen,GM,IC,DB_Size,QNo,AGG,SQ,NumJoins,NumFTAtts,Nu
 - **ET**: The elapsed time of each query.
 
     (Related to **_Query time_** in Figure 1.)
+
+<br>
+
+# main.R
+
+Description of main.R
+
+## Correlation analysis
+
+example of correlation analysis between KT and ET using `cor.test()` function
+
+```R
+dataset <- read.csv(file=paste0(folder, '/raw_dataset.csv'), header = TRUE,stringsAsFactors = FALSE)
+preprocessed_dataset <- preprocessing(dataset)
+blazingsql <- Normalize_GroupbyDBMS(preprocessed_dataset,"BlazingSQL",nontime_feature,time_feature)
+pgstrom <- Normalize_GroupbyDBMS(preprocessed_dataset,"PG-Strom",nontime_feature,time_feature)
+omnisci <- Normalize_GroupbyDBMS(preprocessed_dataset,"OmniSci",nontime_feature,time_feature)
+entire_dataset <- bind_rows(blazingsql, pgstrom) %>% bind_rows(omnisci)
+df <- as.data.frame(cbind(KT=entire_dataset$KT, ET=entire_dataset$ET))
+cor.test(df$KT,df$ET, method = "pearson")
+```
+
+<br>
+
+## Regression analysis
+example of regression analysis between GM and HDT using `lm()` function.
+
+```R
+dataset <- read.csv(file=paste0(folder, '/raw_dataset.csv'), header = TRUE,stringsAsFactors = FALSE)
+preprocessed_dataset <- preprocessing(dataset)
+blazingsql <- Normalize_GroupbyDBMS(preprocessed_dataset,"BlazingSQL",nontime_feature,time_feature)
+pgstrom <- Normalize_GroupbyDBMS(preprocessed_dataset,"PG-Strom",nontime_feature,time_feature)
+omnisci <- Normalize_GroupbyDBMS(preprocessed_dataset,"OmniSci",nontime_feature,time_feature)
+entire_dataset <- bind_rows(blazingsql, pgstrom) %>% bind_rows(omnisci)
+fit = lm(GM ~ HDT, data = entire_dataset)
+summary(fit)
+```
+
+# NormalizationandCorrelation.R
+
+Description of NormalizationandCorrelation.R
+
+# QueryKernel.R
+
+Description of QueryKernel.R
+
+# ReArrange.R
+
+Description of ReArrange.R
