@@ -104,4 +104,4 @@ summary(fit)
 
 # ReArrange.R
 
-Description of ReArrange.R
+`ReArrange.R` defines the functions used in `main.R`
