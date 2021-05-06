@@ -1,10 +1,3 @@
-#install.packages("dplyr")
-#library(dplyr)
-#install.packages("pastecs")
-#library(pastecs)
-#install.packages("ggplot2")
-#library(ggplot2)
-
 RowName="Row_No"
 queryNumber="QNo"
 
@@ -13,7 +6,6 @@ full_feature <- c(RowName, 'DBMS', 'IM', 'CF', 'MG', 'RAM_Size', 'Gen', 'GM', 'D
                       'NumDsTbl', 'CW', 'OB', 'HDT','DHT','PF','NumIK', 'KT','ET')
 
 
-# ?????ͼ? ??ó??
 preprocessing <- function(dataset){
   
   dataset <- na.omit(dataset)
@@ -31,11 +23,9 @@ preprocessing <- function(dataset){
   return(dataset)
 }
 
-# Minmax ??ȭ 
 MinMaxNormalize <- function(x)
   return((x-min(x, na.rm = T))/(max(x, na.rm = T)-min(x,na.rm = T)))
 
-# ??ȭ ?Լ? 
 Normalize_GroupbyDBMS <- function(dataset, DBMS_NAME, nontime_feature, time_feature){
   Query <- unique(dataset[,queryNumber])
   
@@ -60,7 +50,6 @@ Normalize_GroupbyDBMS <- function(dataset, DBMS_NAME, nontime_feature, time_feat
 }
 
 
-# trimpoint% ?̿? ?????Ǵ? outlier count 0~4??
 OutlierCount <- function(df, features, trimpoints){
   
   percent_ <- c("Raw")
@@ -100,7 +89,6 @@ OutlierCount <- function(df, features, trimpoints){
   return(mt)
 }
 
-# Ư trimpoint???? 4?? ?̻? columns???? outlier?Ǵ? sample ????
 Trim_Outlier <- function(df, features, trimpoint){
   
   df[RowName] <- seq(1:nrow(df[RowName]))
@@ -123,7 +111,6 @@ Trim_Outlier <- function(df, features, trimpoint){
   return(db)
 }
 
-# trimpoint% ?̿? ?????Ǵ? outlier count
 OutlierCount_prev <- function(df, dbms, features, trimpoints){
   
   
@@ -165,7 +152,6 @@ OutlierCount_prev <- function(df, dbms, features, trimpoints){
   return(mt)
 }
 
-# Ư % ?̻? outlier ????
 Trim_Outlier_prev <- function(df, features, point){
   db <- na.omit(df)
   set <- c(-1)
@@ -179,7 +165,6 @@ Trim_Outlier_prev <- function(df, features, point){
   return(db)
 }
 
-# Entire Df?? ?? ?ε??? ??
 Make_index <- function(entire, trimpoints){
   percent_ <- c("Raw", "sliceNA")
   for(idx in 1:length(trimpoints)){
@@ -189,7 +174,6 @@ Make_index <- function(entire, trimpoints){
   return(entire)
 }
 
-# ?? DBMS Sliced Outlier ?? plt
 EntirePlot <- function(entire_agg){
   
   index <- rownames(entire_agg)[-1]
@@ -227,7 +211,6 @@ EntirePlot <- function(entire_agg){
   legend(nrows-4, max_+65, colname, cex=0.7, pch=1, col=1:ncols, lty = 1)
 }
 
-# ???? DBMS Sliced Outlier ?? plt 
 Indivisual_Plot <- function(dbms_agg){
   index <- rownames(dbms_agg)[-1]
   nrows <- nrow(dbms_agg)
@@ -254,7 +237,6 @@ Indivisual_Plot <- function(dbms_agg){
   legend(3, max_, colname, cex=0.8, pch=1, col=1, lty = 1)
 }
 
-# Trimpoints ???? ??????
 Make_Trimpoints <- function(start, end, interval){
   cnt <- (start-end)/interval
   points <- c()
@@ -265,7 +247,6 @@ Make_Trimpoints <- function(start, end, interval){
   return(points)
 }
 
-# ????????
 Correlation <- function(df){
   db<- subset(df, select=-c(`Row No.`, DBMS, QNo))
   
