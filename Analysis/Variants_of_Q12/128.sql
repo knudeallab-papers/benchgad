@@ -3,7 +3,19 @@ select
 	sum(l_quantity) as sum_qty,
 	sum(l_extendedprice) as sum_base_price,
 	sum(l_extendedprice * (1 - l_discount)) as sum_disc_price,
-	sum(l_extendedprice * (1 - l_discount) * (1 + l_tax)) as sum_charge
+	sum(l_extendedprice * (1 - l_discount) * (1 + l_tax)) as sum_charge,
+	sum(case
+		when o_orderpriority = '1-URGENT'
+			or o_orderpriority = '2-HIGH'
+			then 1
+		else 0
+	end) as high_line_count,
+	sum(case
+		when o_orderpriority <> '1-URGENT'
+			and o_orderpriority <> '2-HIGH'
+			then 1
+		else 0
+	end) as low_line_count
 from
 	lineitem
 	inner join orders on l_orderkey = o_orderkey
