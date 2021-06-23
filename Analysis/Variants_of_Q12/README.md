@@ -1,4 +1,4 @@
-# Twelve variants of Q12
+# Eight variants of Q12
 
 > ### **_S_** for selection, **_P_** for projection, and **_J_** for join condition.
 
