@@ -12,7 +12,7 @@ preprocessing <- function(dataset){
   dataset$Gen <- sapply(dataset$Gen, function(x){ifelse(x=='3090', 3, ifelse(x=='2080ti', 2, 1))})
   
   dataset[, c('IM','CF','MG','AGG','SQ','CW','OB')] <- lapply(dataset[, c('IM','CF','MG','AGG','SQ','CW','OB')],function(x){ifelse(x==TRUE, 1, 0)})
-  dataset[, c('ET','NumIK','PF','DHT')] <- lapply(dataset[,c('ET','NumIK','PF','DHT')], as.numeric)
+  dataset[, c('ET','NumIK','PF','HDT','DHT')] <- lapply(dataset[,c('ET','NumIK','PF','HDT','DHT')], as.numeric)
  
   dataset <- dataset[!(dataset$QNo =="Q11")&!(dataset$QNo =="Q20")&!(dataset$QNo =="Q21")&!(dataset$QNo =="Q22"),]
   #dataset <- dataset[c(1:19, 21:23)]

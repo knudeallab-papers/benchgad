@@ -2,8 +2,8 @@
 
 
 ```
-Row_No,DBMS,IM,CF,MG,RAM_Size,Gen,GM,IC,DB_Size,QNo,AGG,SQ,NumJoins,NumFTAtts,NumAllAtts,NumAllTbl,NumDsTbl,CW,OB,HDT,DHT,PF,NumIK,KT,ET
-1,BlazingSQL,T,T,F,48,2080ti,11,-,1,Q1,T,F,0,7,7,1,1,F,T,341.471,81.568,0,140,18516.95,37272
+Row_No,DBMS,IM,CF,MG,RAM_Size,Gen,GM,DB_Size,QNo,AGG,SQ,NumJoins,NumFTAtts,NumAllAtts,NumAllTbl,NumDsTbl,CW,OB,HDT,DHT,PF,NumIK,KT,ET
+1,BlazingSQL,T,T,F,48,2080ti,11,1,Q1,T,F,0,7,7,1,1,F,T,341.471,81.568,0,140,18516.95,37272
 ...
 ```
 
