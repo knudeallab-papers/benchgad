@@ -2,8 +2,8 @@
 
 
 ```
-Row_No,DBMS,IM,CF,MG,RAM_Size,Gen,GM,DB_Size,BS,QNo,AGG,SQ,NumJoins,NumFTAtts,NumAllAtts,NumAllTbl,NumDsTbl,CW,OB,HDT,DHT,PF,NumIK,KT,ET
-1,BlazingSQL,T,T,F,48,2080ti,11,1,616,Q1,T,F,0,7,7,1,1,F,T,341.471,81.568,0,140,18516.95,37272
+Row_No,DBMS,IM,CF,MG,RAM_Size,Gen,GM,DB_Size,BS,QNo,AGG,SQ,NumJoins,NumFTAtts,NumAllAtts,NumAllTbl,NumDsTbl,CW,OB,HDT,DHT,PF,NumIK,KT,ET,DT
+1,BlazingSQL,T,T,F,48,2080ti,11,1,616,Q1,T,F,0,7,7,1,1,F,T,341.471,81.568,0,140,18516.95,37272,341.471
 ...
 ```
 
@@ -31,9 +31,9 @@ Row_No,DBMS,IM,CF,MG,RAM_Size,Gen,GM,DB_Size,BS,QNo,AGG,SQ,NumJoins,NumFTAtts,Nu
 
     >Related to **_Data Complexity - Scale of data volume_** in Figure 1.
 
-- **BS**: The size of Gpu's bandwidth(GB/sec). 
+- **CC**: The number of GPU engine CUDA Cores. 
 
-    >Related to **_Data Complexity - Bandwidth size_** in Figure 1.
+    >Related to **_Hardware Complexity - Number of CUDA Cores_** in Figure 1.
 	
 - **QNo**: The sequence number of each [TPC-H](http://www.tpc.org/tpch/) query.
 
@@ -65,8 +65,6 @@ Row_No,DBMS,IM,CF,MG,RAM_Size,Gen,GM,DB_Size,BS,QNo,AGG,SQ,NumJoins,NumFTAtts,Nu
 
 - **HDT**: Data migration(_HtoD_) time.
 
-    >Related to **_Kernel Complexity - Data transfer time_** in Figure 1.
-
 - **DHT**: Data migration(_DtoH_) time.
 
 - **PF**: The number of _page fault_.
@@ -85,6 +83,10 @@ Row_No,DBMS,IM,CF,MG,RAM_Size,Gen,GM,DB_Size,BS,QNo,AGG,SQ,NumJoins,NumFTAtts,Nu
 
     >Related to **_Query time_** in Figure 1.
 
+- **DT**: Data transfer time.
+
+    >Related to **_Kernel Complexity - Data transfer time_** in Figure 1.
+	
 <br>
 
 # main.R

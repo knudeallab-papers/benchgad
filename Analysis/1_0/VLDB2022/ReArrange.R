@@ -1,9 +1,9 @@
 RowName="Row_No"
 queryNumber="QNo"
 
-full_feature <- c(RowName, 'DBMS', 'IM', 'CF', 'MG', 'RAM_Size', 'Gen', 'GM', 'DB_Size', 'BS', 'QNo','AGG',
-                      'SQ', 'NumJoins', 'NumFTAtts', 'NumAllAtts', 'NumAllTbl',
-                      'NumDsTbl', 'CW', 'OB', 'HDT','DHT','PF','NumIK', 'KT','ET')
+full_feature <- c(RowName, 'DBMS', 'IM', 'CF', 'MG', 'RAM_Size', 'Gen', 'GM', 'DB_Size', 'CC', 'QNo','AGG',
+                  'SQ', 'NumJoins', 'NumFTAtts', 'NumAllAtts', 'NumAllTbl',
+                  'NumDsTbl', 'CW', 'OB', 'HDT','DHT','PF','NumIK', 'KT','ET','DT')
 
 preprocessing <- function(dataset){
   
@@ -12,12 +12,11 @@ preprocessing <- function(dataset){
   dataset$Gen <- sapply(dataset$Gen, function(x){ifelse(x=='3090', 3, ifelse(x=='2080ti', 2, 1))})
   
   dataset[, c('IM','CF','MG','AGG','SQ','CW','OB')] <- lapply(dataset[, c('IM','CF','MG','AGG','SQ','CW','OB')],function(x){ifelse(x==TRUE, 1, 0)})
-  dataset[, c('ET','NumIK','BS','PF','HDT','DHT')] <- lapply(dataset[,c('ET','NumIK','BS','PF','HDT','DHT')], as.numeric)
-  
+  dataset[, c('ET','NumIK','CC','PF','HDT','DHT','DT')] <- lapply(dataset[,c('ET','NumIK','CC','PF','HDT','DHT','DT')], as.numeric)
   
   dataset <- dataset[!(dataset$QNo =="Q11")&!(dataset$QNo =="Q20")&!(dataset$QNo =="Q21")&!(dataset$QNo =="Q22"),]
   #dataset <- dataset[c(1:19, 21:23)]
-
+  
   #dataset <- dataset[c(1:19, 21:23)]
   #names(dataset) <- full_feature
   return(dataset)
@@ -43,12 +42,8 @@ Normalize_GroupbyDBMS <- function(dataset, DBMS_NAME, nontime_feature, time_feat
   }
   
   # nontime feature?? minmax normalization
-  for(feature in nontime_feature)
+  for(feature in nontime_feature) 
     data[feature] <- MinMaxNormalize(data[feature])
-  
+
   return(data)
 }
-
-
-
-
