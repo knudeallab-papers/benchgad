@@ -173,4 +173,21 @@ summary(fit_nik) ## 11.47%
 
 ## A fit for Data transfer time  
 fit_dt = lm(DT ~ GM + PF + DB_Size , data = entire_dataset) 
-summary(fit_dt) ## 21.84%
+summary(fit_dt) ## 21.84% 
+
+### future work
+## causal mediation analysis
+med_dataset <- entire_dataset
+med_dataset <- na.omit(med_dataset)
+#med_dataset <- setNames(med_dataset, names(entire_dataset)) 
+#colnames(med_dataset) <- names(entire_dataset)
+#med.fit <- lm(KT ~ MG + CC + PF + DB_Size, data = med_dataset)
+med.fit <- lm(KT ~ CC + PF + DB_Size, data = med_dataset)
+out.fit <- lm(ET ~ DT + KT + PF, data = med_dataset)
+med.out <- mediate(med.fit, out.fit, treat = "PF", mediator="KT", robustSE=TRUE, sims = 100)
+summary(med.out)
+
+#med2.fit <- lm(DT ~ GM + PF + DB_Size , data = med_dataset) 
+med2.fit <- lm(DT ~ PF + DB_Size , data = med_dataset) 
+med2.out <- mediate(med2.fit, out.fit, treat = "PF", mediator="DT", robustSE=TRUE, sims = 100)
+summary(med2.out)
