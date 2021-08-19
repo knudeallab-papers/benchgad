@@ -11,7 +11,7 @@ time_feature <- c('HDT','DHT','KT','ET','DT')
 
 folder <- '.'
 setwd(folder)
-source(paste0(folder, "/ReArrange.R"), echo=TRUE)
+source(paste0(folder, "/ReArrange_new.R"), echo=TRUE)
 source(paste0(folder, "/ShowStat.R"), echo=TRUE)
 
 dataset <- read.csv(file=paste0(folder, '/raw_dataset.csv'), header = TRUE,stringsAsFactors = FALSE)
@@ -26,7 +26,10 @@ dataset <- rbind(pg_dataset, bz_dataset) %>% rbind(om_dataset)
 ShowStat(dataset)
 
 preprocessed_dataset <- preprocessing(dataset)
+preprocessed_dataset$MG
 #nrow(preprocessed_dataset)
+#dataset$Gen <- sapply(dataset$Gen, function(x){ifelse(x=='3090', 3, ifelse(x=='2080ti', 2, 1))})
+#mg_dataset <- filter(preprocessed_dataset, MG==2)
 
 blazingsql <- Normalize_GroupbyDBMS(preprocessed_dataset,"BlazingSQL",nontime_feature,time_feature)
 
@@ -36,104 +39,138 @@ omnisci <- Normalize_GroupbyDBMS(preprocessed_dataset,"OmniSci",nontime_feature,
 
 entire_dataset <- bind_rows(blazingsql, pgstrom) %>% bind_rows(omnisci)
 
-#
-test <- as.data.frame(cbind(X=entire_dataset$MG, Y=entire_dataset$DT))
-res <- cor.test(test$X,test$Y, 
-                method = "pearson")
-res
 
+### Section 5.1 Correlation Analysis
+## H1a 
 test <- as.data.frame(cbind(X=entire_dataset$MG, Y=entire_dataset$KT))
 res <- cor.test(test$X,test$Y, 
                 method = "pearson")
 res
 
-test <- as.data.frame(cbind(X=entire_dataset$GM, Y=entire_dataset$DT))
+## H1b 
+test <- as.data.frame(cbind(X=entire_dataset$RAM_Size, Y=entire_dataset$PF))
 res <- cor.test(test$X,test$Y, 
                 method = "pearson")
 res
 
-test <- as.data.frame(cbind(X=entire_dataset$GM, Y=entire_dataset$PF))
+## H1c 
+test <- as.data.frame(cbind(X=entire_dataset$CC, Y=entire_dataset$KT))
 res <- cor.test(test$X,test$Y, 
                 method = "pearson")
 res
 
-test <- as.data.frame(cbind(X=entire_dataset$BS, Y=entire_dataset$DT))
-res <- cor.test(test$X,test$Y, 
-                method = "pearson")
-res
+## H1d
 
 test <- as.data.frame(cbind(X=entire_dataset$RAM_Size, Y=entire_dataset$DT))
 res <- cor.test(test$X,test$Y, 
                 method = "pearson")
 res
 
-test <- as.data.frame(cbind(X=entire_dataset$RAM_Size, Y=entire_dataset$PF))
+
+## H1e
+
+test <- as.data.frame(cbind(X=entire_dataset$GM, Y=entire_dataset$DT))
 res <- cor.test(test$X,test$Y, 
                 method = "pearson")
 res
 
+## H2a
 test <- as.data.frame(cbind(X=entire_dataset$NumJoins, Y=entire_dataset$NumIK))
 res <- cor.test(test$X,test$Y, 
                 method = "pearson")
 res
 
+## H2b
 test <- as.data.frame(cbind(X=entire_dataset$NumAllAtts, Y=entire_dataset$NumIK))
 res <- cor.test(test$X,test$Y, 
                 method = "pearson")
 res
 
+## H2c
 test <- as.data.frame(cbind(X=entire_dataset$SQ, Y=entire_dataset$NumIK))
 res <- cor.test(test$X,test$Y, 
                 method = "pearson")
 res
 
-test <- as.data.frame(cbind(X=entire_dataset$DB_Size, Y=entire_dataset$DT))
-res <- cor.test(test$X,test$Y, 
-                method = "pearson")
-res
 
-test <- as.data.frame(cbind(X=entire_dataset$DB_Size, Y=entire_dataset$PF))
-res <- cor.test(test$X,test$Y, 
-                method = "pearson")
-res
-
-test <- as.data.frame(cbind(X=entire_dataset$DB_Size, Y=entire_dataset$NumIK))
-res <- cor.test(test$X,test$Y, 
-                method = "pearson")
-res
-
+## H3a
 test <- as.data.frame(cbind(X=entire_dataset$DB_Size, Y=entire_dataset$KT))
 res <- cor.test(test$X,test$Y, 
                 method = "pearson")
 res
 
+## H3b
+test <- as.data.frame(cbind(X=entire_dataset$DB_Size, Y=entire_dataset$PF))
+res <- cor.test(test$X,test$Y, 
+                method = "pearson")
+res
+
+## H3c
+test <- as.data.frame(cbind(X=entire_dataset$DB_Size, Y=entire_dataset$NumIK))
+res <- cor.test(test$X,test$Y, 
+                method = "pearson")
+res
+
+
+## H3d
+test <- as.data.frame(cbind(X=entire_dataset$DB_Size, Y=entire_dataset$DT))
+res <- cor.test(test$X,test$Y, 
+                method = "pearson")
+res
+
+## H4a
 test <- as.data.frame(cbind(X=entire_dataset$PF, Y=entire_dataset$NumIK))
 res <- cor.test(test$X,test$Y, 
                 method = "pearson")
 res
 
+## H4b
 test <- as.data.frame(cbind(X=entire_dataset$PF, Y=entire_dataset$KT))
 res <- cor.test(test$X,test$Y, 
                 method = "pearson")
 res
 
-test <- as.data.frame(cbind(X=entire_dataset$NumIK, Y=entire_dataset$PF))
+## H4c
+test <- as.data.frame(cbind(X=entire_dataset$PF, Y=entire_dataset$DT))
 res <- cor.test(test$X,test$Y, 
                 method = "pearson")
 res
 
-test <- as.data.frame(cbind(X=entire_dataset$DT, Y=entire_dataset$ET))
-res <- cor.test(test$X,test$Y, 
-                method = "pearson")
-res
-
-test <- as.data.frame(cbind(X=entire_dataset$KT, Y=entire_dataset$PF))
-res <- cor.test(test$X,test$Y, 
-                method = "pearson")
-res
-
+# H5a
 test <- as.data.frame(cbind(X=entire_dataset$KT, Y=entire_dataset$ET))
 res <- cor.test(test$X,test$Y, 
                 method = "pearson")
 res
 
+# H5b
+test <- as.data.frame(cbind(X=entire_dataset$DT, Y=entire_dataset$ET))
+res <- cor.test(test$X,test$Y, 
+                method = "pearson")
+res
+
+# H5c
+test <- as.data.frame(cbind(X=entire_dataset$PF, Y=entire_dataset$ET))
+res <- cor.test(test$X,test$Y, 
+                method = "pearson")
+res
+
+### Section 5.2 Regression Analysis
+## A fit for Elapsed time
+fit_et = lm(ET ~ DT + KT, data = entire_dataset) 
+summary(fit_et) # 76.67%
+
+## A fit for Kernel execution time 
+fit_kt = lm(KT ~ MG + CC + PF + DB_Size, data = entire_dataset)
+summary(fit_kt) ## 47.7 %
+
+## A fit for Number of page faults  
+fit_pf = lm(PF ~ RAM_Size + GM +  NumIK + DB_Size, data = entire_dataset)    # 
+summary(fit_pf) ## 30.73%
+
+## A fit for Number of invoked kernels 
+fit_nik = lm(NumIK ~ NumJoins + NumAllAtts + SQ + DB_Size, data = entire_dataset)
+summary(fit_nik) ## 11.47%
+
+## A fit for Data transfer time  
+fit_dt = lm(DT ~ GM + PF + DB_Size , data = entire_dataset) 
+summary(fit_dt) ## 21.84%

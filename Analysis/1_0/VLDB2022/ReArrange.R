@@ -10,8 +10,10 @@ preprocessing <- function(dataset){
   dataset <- na.omit(dataset)
   
   dataset$Gen <- sapply(dataset$Gen, function(x){ifelse(x=='3090', 3, ifelse(x=='2080ti', 2, 1))})
+  dataset$MG <- sapply(dataset$MG, function(x){ifelse(x==FALSE, 1, ifelse(x==TRUE, 2, 0))})
   
-  dataset[, c('IM','CF','MG','AGG','SQ','CW','OB')] <- lapply(dataset[, c('IM','CF','MG','AGG','SQ','CW','OB')],function(x){ifelse(x==TRUE, 1, 0)})
+  #dataset[, c('IM','CF','MG','AGG','SQ','CW','OB')] <- lapply(dataset[, c('IM','CF','MG','AGG','SQ','CW','OB')],function(x){ifelse(x==TRUE, 1, 0)})
+  dataset[, c('IM','CF','AGG','SQ','CW','OB')] <- lapply(dataset[, c('IM','CF','AGG','SQ','CW','OB')],function(x){ifelse(x==TRUE, 1, 0)})
   dataset[, c('ET','NumIK','CC','PF','HDT','DHT','DT')] <- lapply(dataset[,c('ET','NumIK','CC','PF','HDT','DHT','DT')], as.numeric)
   
   dataset <- dataset[!(dataset$QNo =="Q11")&!(dataset$QNo =="Q20")&!(dataset$QNo =="Q21")&!(dataset$QNo =="Q22"),]
