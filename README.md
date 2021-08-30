@@ -1,1 +1,1 @@
-# [VLDB2022] A Comprehensive Empirical Study Across GPU-acceleratedDBMSes for Better Understanding Performance Implications
+# [VLDB2022] Towards Better Understanding of the Performance ofGPU-Accelerated DBMSes: A Comprehensive Empirical Study
