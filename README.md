@@ -1,1 +1,1 @@
-# [VLDB2022] Towards Better Understanding of the Performance ofGPU-Accelerated DBMSes: A Comprehensive Empirical Study
+# [SIGMETRICS2022] A Comprehensive Study of the Performance Across GPU-Accelerated DBMSes
