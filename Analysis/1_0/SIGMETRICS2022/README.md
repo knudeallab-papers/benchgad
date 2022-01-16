@@ -104,14 +104,16 @@ blazingsql <- Normalize_GroupbyDBMS(preprocessed_dataset,"BlazingSQL",nontime_fe
 pgstrom <- Normalize_GroupbyDBMS(preprocessed_dataset,"PG-Strom",nontime_feature,time_feature)
 omnisci <- Normalize_GroupbyDBMS(preprocessed_dataset,"OmniSci",nontime_feature,time_feature)
 entire_dataset <- bind_rows(blazingsql, pgstrom) %>% bind_rows(omnisci)
-df <- as.data.frame(cbind(KT=entire_dataset$KT, ET=entire_dataset$ET))
-cor.test(df$KT,df$ET, method = "pearson")
+test <- as.data.frame(cbind(X=entire_dataset$KT, Y=entire_dataset$ET))
+res <- cor.test(test$X,test$Y, 
+                method = "pearson")
+res
 ```
 
 <br>
 
 ## Regression analysis
-example of regression analysis between GM and HDT using `lm()` function.
+example of regression analysis between ET and DT + KT using `lm()` function.
 
 ```R
 dataset <- read.csv(file=paste0(folder, '/raw_dataset.csv'), header = TRUE,stringsAsFactors = FALSE)
@@ -120,8 +122,8 @@ blazingsql <- Normalize_GroupbyDBMS(preprocessed_dataset,"BlazingSQL",nontime_fe
 pgstrom <- Normalize_GroupbyDBMS(preprocessed_dataset,"PG-Strom",nontime_feature,time_feature)
 omnisci <- Normalize_GroupbyDBMS(preprocessed_dataset,"OmniSci",nontime_feature,time_feature)
 entire_dataset <- bind_rows(blazingsql, pgstrom) %>% bind_rows(omnisci)
-fit = lm(GM ~ HDT, data = entire_dataset)
-summary(fit)
+fit_et = lm(ET ~ DT + KT, data = entire_dataset) 
+summary(fit_et) # 76.67%
 ```
 
 <br>
