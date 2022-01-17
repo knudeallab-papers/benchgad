@@ -88,9 +88,9 @@ Row_No,DBMS,IM,CF,MG,RAM_Size,Gen,GM,DB_Size,BS,QNo,AGG,SQ,NumJoins,NumFTAtts,Nu
 	
 <br>
 
-# main.R
+# Analysis.R
 
-Description of main.R
+Description of Analysis.R
 
 ## Correlation analysis
 
@@ -129,4 +129,4 @@ summary(fit_et) # 76.67%
 
 # ReArrange.R
 
-`ReArrange.R` defines the functions used in `main.R`
+`ReArrange.R` defines the functions used in `Analysis.R`
