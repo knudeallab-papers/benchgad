@@ -153,20 +153,20 @@ res
 ### Section 5.3 Regression Analysis
 ## A fit for Elapsed time
 fit_et = lm(ET ~ DT + KT, data = entire_dataset) 
-summary(fit_et) # 76.67%
+summary(fit_et) 
 
 ## A fit for Kernel execution time 
 fit_kt = lm(KT ~ MG + CC + PF + DB_Size, data = entire_dataset)
-summary(fit_kt) ## 47.7 %
+summary(fit_kt) 
 
 ## A fit for Number of page faults  
-fit_pf = lm(PF ~ RAM_Size + GM +  NumIK + DB_Size, data = entire_dataset)    # 
-summary(fit_pf) ## 30.73%
+fit_pf = lm(PF ~ RAM_Size + GM +  NumIK + DB_Size, data = entire_dataset)   
+summary(fit_pf)
 
 ## A fit for Number of invoked kernels 
 fit_nik = lm(NumIK ~ NumJoins + NumAllAtts + SQ + DB_Size, data = entire_dataset)
-summary(fit_nik) ## 11.47%
+summary(fit_nik) 
 
 ## A fit for Data transfer time  
 fit_dt = lm(DT ~ GM + PF + DB_Size , data = entire_dataset) 
-summary(fit_dt) ## 21.84%
+summary(fit_dt) 
