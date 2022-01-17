@@ -1,4 +1,4 @@
-# [SIGMETRICS2022] A Comprehensive Study of the Performance Across GPU-Accelerated DBMSes
+# [SIGMETRICS2022] A Comprehensive Empirical Study of Query Performance Across GPU DBMSes
 
 |  | `PG-Strom` <br> `PostgreSQL` | `OmniSci`  | `BlazingSQL` | `CUDA driver` | `NVIDIA driver` |
 | :--: | :-: | :-: | :-: | :-: | :-: |
