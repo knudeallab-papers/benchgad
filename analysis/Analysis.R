@@ -15,7 +15,6 @@ source(paste0(folder, "/ReArrange_new.R"), echo=TRUE)
 source(paste0(folder, "/ShowStat.R"), echo=TRUE)
 
 dataset <- read.csv(file=paste0(folder, '/raw_dataset.csv'), header = TRUE,stringsAsFactors = FALSE)
-## data transfer time 
 pg_dataset <- filter(dataset, DBMS=="PG-Strom")
 bz_dataset <- filter(dataset, DBMS=="BlazingSQL")
 om_dataset <- filter(dataset, DBMS=="OmniSci")
@@ -27,9 +26,6 @@ ShowStat(dataset)
 
 preprocessed_dataset <- preprocessing(dataset)
 preprocessed_dataset$MG
-#nrow(preprocessed_dataset)
-#dataset$Gen <- sapply(dataset$Gen, function(x){ifelse(x=='3090', 3, ifelse(x=='2080ti', 2, 1))})
-#mg_dataset <- filter(preprocessed_dataset, MG==2)
 
 blazingsql <- Normalize_GroupbyDBMS(preprocessed_dataset,"BlazingSQL",nontime_feature,time_feature)
 
@@ -40,7 +36,7 @@ omnisci <- Normalize_GroupbyDBMS(preprocessed_dataset,"OmniSci",nontime_feature,
 entire_dataset <- bind_rows(blazingsql, pgstrom) %>% bind_rows(omnisci)
 
 
-### Section 5.1 Correlation Analysis
+### Section 5.2 Correlation Analysis
 ## H1a 
 test <- as.data.frame(cbind(X=entire_dataset$MG, Y=entire_dataset$KT))
 res <- cor.test(test$X,test$Y, 
@@ -154,7 +150,7 @@ res <- cor.test(test$X,test$Y,
                 method = "pearson")
 res
 
-### Section 5.2 Regression Analysis
+### Section 5.3 Regression Analysis
 ## A fit for Elapsed time
 fit_et = lm(ET ~ DT + KT, data = entire_dataset) 
 summary(fit_et) # 76.67%

@@ -12,15 +12,11 @@ preprocessing <- function(dataset){
   dataset$Gen <- sapply(dataset$Gen, function(x){ifelse(x=='3090', 3, ifelse(x=='2080ti', 2, 1))})
   dataset$MG <- sapply(dataset$MG, function(x){ifelse(x==FALSE, 1, ifelse(x==TRUE, 2, 0))})
   
-  #dataset[, c('IM','CF','MG','AGG','SQ','CW','OB')] <- lapply(dataset[, c('IM','CF','MG','AGG','SQ','CW','OB')],function(x){ifelse(x==TRUE, 1, 0)})
-  dataset[, c('IM','CF','AGG','SQ','CW','OB')] <- lapply(dataset[, c('IM','CF','AGG','SQ','CW','OB')],function(x){ifelse(x==TRUE, 1, 0)})
+ dataset[, c('IM','CF','AGG','SQ','CW','OB')] <- lapply(dataset[, c('IM','CF','AGG','SQ','CW','OB')],function(x){ifelse(x==TRUE, 1, 0)})
   dataset[, c('ET','NumIK','CC','PF','HDT','DHT','DT')] <- lapply(dataset[,c('ET','NumIK','CC','PF','HDT','DHT','DT')], as.numeric)
   
   dataset <- dataset[!(dataset$QNo =="Q11")&!(dataset$QNo =="Q20")&!(dataset$QNo =="Q21")&!(dataset$QNo =="Q22"),]
-  #dataset <- dataset[c(1:19, 21:23)]
-  
-  #dataset <- dataset[c(1:19, 21:23)]
-  #names(dataset) <- full_feature
+
   return(dataset)
 }
 
@@ -37,13 +33,11 @@ Normalize_GroupbyDBMS <- function(dataset, DBMS_NAME, nontime_feature, time_feat
     return(-1)
   }
   
-  # Time feature?? Query?? log transformation 
   for(query in Query){
     for(feature in time_feature)
       data[(data[,queryNumber]==query), feature]=log1p(data[(data[,queryNumber]==query), feature])
   }
   
-  # nontime feature?? minmax normalization
   for(feature in nontime_feature) 
     data[feature] <- MinMaxNormalize(data[feature])
 
