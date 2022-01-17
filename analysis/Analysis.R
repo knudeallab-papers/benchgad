@@ -40,7 +40,7 @@ omnisci <- Normalize_GroupbyDBMS(preprocessed_dataset,"OmniSci",nontime_feature,
 entire_dataset <- bind_rows(blazingsql, pgstrom) %>% bind_rows(omnisci)
 
 
-### Section 5.1 Correlation Analysis
+### Section 5.2 Correlation Analysis
 ## H1a 
 test <- as.data.frame(cbind(X=entire_dataset$MG, Y=entire_dataset$KT))
 res <- cor.test(test$X,test$Y, 
@@ -154,7 +154,7 @@ res <- cor.test(test$X,test$Y,
                 method = "pearson")
 res
 
-### Section 5.2 Regression Analysis
+### Section 5.3 Regression Analysis
 ## A fit for Elapsed time
 fit_et = lm(ET ~ DT + KT, data = entire_dataset) 
 summary(fit_et) # 76.67%
@@ -164,7 +164,7 @@ fit_kt = lm(KT ~ MG + CC + PF + DB_Size, data = entire_dataset)
 summary(fit_kt) ## 47.7 %
 
 ## A fit for Number of page faults  
-fit_pf = lm(PF ~ RAM_Size + GM +  NumIK + DB_Size, data = entire_dataset)    # 
+fit_pf = lm(PF ~ RAM_Size + GM +  NumIK + DB_Size, data = entire_dataset)   
 summary(fit_pf) ## 30.73%
 
 ## A fit for Number of invoked kernels 
