@@ -11,10 +11,10 @@ time_feature <- c('HDT','DHT','KT','ET','DT')
 
 folder <- '.'
 setwd(folder)
-source(paste0(folder, "/ReArrange_new.R"), echo=TRUE)
+source(paste0(folder, "/ReArrange.R"), echo=TRUE)
 source(paste0(folder, "/ShowStat.R"), echo=TRUE)
 
-dataset <- read.csv(file=paste0(folder, '/raw_dataset.csv'), header = TRUE,stringsAsFactors = FALSE)
+dataset <- read.csv(file=paste0(folder, '/integrated_raw_dataset.csv'), header = TRUE,stringsAsFactors = FALSE)
 pg_dataset <- filter(dataset, DBMS=="PG-Strom")
 bz_dataset <- filter(dataset, DBMS=="BlazingSQL")
 om_dataset <- filter(dataset, DBMS=="OmniSci")
@@ -140,12 +140,6 @@ res
 
 # H5b
 test <- as.data.frame(cbind(X=entire_dataset$DT, Y=entire_dataset$ET))
-res <- cor.test(test$X,test$Y, 
-                method = "pearson")
-res
-
-# H5c
-test <- as.data.frame(cbind(X=entire_dataset$PF, Y=entire_dataset$ET))
 res <- cor.test(test$X,test$Y, 
                 method = "pearson")
 res
