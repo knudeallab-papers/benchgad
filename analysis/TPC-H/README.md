@@ -122,7 +122,7 @@ pgstrom <- Normalize_GroupbyDBMS(preprocessed_dataset,"PG-Strom",nontime_feature
 omnisci <- Normalize_GroupbyDBMS(preprocessed_dataset,"OmniSci",nontime_feature,time_feature)
 entire_dataset <- bind_rows(blazingsql, pgstrom) %>% bind_rows(omnisci)
 fit_et = lm(ET ~ DT + KT, data = entire_dataset) 
-summary(fit_et) # 76.67%
+summary(fit_et) 
 ```
 
 <br>
